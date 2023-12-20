@@ -25,7 +25,7 @@ public class MaxMemoryUtilizedByTask {
             if (memory <= maxMemory) {
                 totalTime += 1;
             } else {
-                totalTime += Math.ceil((double) memory / maxMemory);
+                totalTime += Math.ceil( memory / maxMemory);
             }
         }
         return totalTime;
