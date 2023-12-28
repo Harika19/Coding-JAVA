@@ -20,21 +20,71 @@ public class Ip_addresses_Wayfair {
     private int[] findIPZone(String[][] zoneArr, String[] ipStrArr){
         int len = ipStrArr.length;
         int[] res = new int[len];
+        Arrays.fill(res, -1);
         int row=0, col=0;
-        int[][] parsedIpMatrix = new int[zoneArr.length][4];
+        int[][] parsedFromIp = new int[zoneArr.length][4];
+        int[][] parsedToIp = new int[zoneArr.length][4];
+        int[] startIPResult= new int[4];
+        int[] endIPResult= new int[4];
+
+
         for(String[] aZone : zoneArr){
-            for(String zone: aZone){
-                String[] addressStrArray = zone.split("\\.");
-                //int index =
-                for (String address: addressStrArray){
+            boolean fromFlag = true;
+            String[] startIP = aZone[0].split("\\."); // ['0,0,0,0]
+            String[] endIP = aZone[1].split("\\.");
 
-                }
+            startIPResult = Arrays.stream(startIP).mapToInt(s -> Integer.parseInt(s)).toArray();
+            endIPResult = Arrays.stream(endIP).mapToInt(s -> Integer.parseInt(s)).toArray();
 
-            }
-            col=0;
+            parsedFromIp[row]= startIPResult;
+            parsedToIp[row] = endIPResult;
             row++;
 
+
+
+//            for(String zone: aZone) {
+//                String[] addressStrArray = zone.split("\\.");
+//                int ind = 0;
+//
+//                for (String address: addressStrArray) {
+//                    if(fromFlag) {
+//                        parsedFromIp[row][ind++] = Integer.parseInt(address);
+//                    } else {
+//                        parsedToIp[row][ind++] = Integer.parseInt(address);
+//                    }
+//                }
+//                fromFlag = !fromFlag;
+//
+//            }
+//            row++;
         }
+
+        System.out.println(Arrays.deepToString(parsedFromIp));
+        System.out.println(Arrays.deepToString(parsedToIp));
+
+        for(int k =0; k<ipStrArr.length; k++){
+            int[] parsedIp = Arrays.stream(ipStrArr[k].split("\\."))
+                    .mapToInt(str -> Integer.parseInt(str))
+                    .toArray();
+            System.out.println("parsedIp "+ Arrays.toString(parsedIp));
+            boolean isFound = false;
+            for(int i=0; i<parsedFromIp.length && !isFound; i++){
+                for(int j=0; j<4 && !isFound; j++){
+                    System.out.println("parsedFromIp "+ Arrays.toString(parsedFromIp[i]));
+                    System.out.println("parsedToIp "+ Arrays.toString(parsedToIp[i]));
+                    System.out.println(parsedIp[j] + "  "+ parsedFromIp[i][j] + "  "+parsedToIp[i][j] );
+                    if((parsedIp[j] >= parsedFromIp[i][j]) && (parsedIp[j] <= parsedToIp[i][j])){
+                        res[k] = i;
+                        isFound= true;
+                        break;
+                    }
+                }
+            }
+            System.out.println("\n");
+        }
+
+        //System.out.println(Arrays.toString(parsedIp));
+//        System.out.println(Arrays.deepToString(parsedToIp));
 
         return res;
     }
@@ -58,7 +108,62 @@ public class Ip_addresses_Wayfair {
     }
     public static void main(String[] args) {
         Ip_addresses_Wayfair obj = new Ip_addresses_Wayfair();
+        String[][] zones = {
+                {"0.0.0.0",   "127.255.255.255"},
+                {"128.0.0.0", "191.255.255.255"},
+                {"192.0.0.0", "223.255.255.255"},
+                {"224.0.0.0", "255.255.255.255"}
+        };
         String[] arr={"0.0.0.123","129.234.233.24","256.256.2.1"};
-        System.out.println(Arrays.toString(obj.ip_range(arr)));
+        System.out.println(Arrays.toString(obj.findIPZone(zones, arr)));
     }
 }
+
+//
+//import java.util.regex.Matcher;
+//        import java.util.regex.Pattern;
+//
+//public class Ip_addresses_Wayfair {
+//    private String[] zoneRanges; // Array to store the range of each zone
+//
+//    public Ip_addresses_Wayfair(String[] zoneRanges) {
+//        this.zoneRanges = zoneRanges;
+//    }
+//
+//    public int findZone(String ipAddress) {
+//        long ipNum = ipToLong(ipAddress);
+//        for (int i = 0; i < zoneRanges.length; i++) {
+//            String[] range = zoneRanges[i].split("-");
+//            long lowerBound = ipToLong(range[0].trim());
+//            long upperBound = ipToLong(range[1].trim());
+//
+//            if (ipNum >= lowerBound && ipNum <= upperBound) {
+//                return i + 1; // Zones are 1-indexed
+//            }
+//        }
+//        return -1; // IP does not fall into any zone
+//    }
+//
+//    private long ipToLong(String ipAddress) {
+//        long result = 0;
+//        String[] ipAddressParts = ipAddress.split("\\.");
+//
+//        for (int i = 0; i < ipAddressParts.length; i++) {
+//            int power = 3 - i;
+//            int ip = Integer.parseInt(ipAddressParts[i]);
+//            result += ip * Math.pow(256, power);
+//        }
+//        System.out.println("00000..   "+ result);
+//        return result;
+//    }
+//
+//    public static void main(String[] args) {
+//        String[] zones = {"0.0.0.0 - 127.255.255.255", "128.0.0.0 - 191.255.255.255", "192.0.0.0 - 223.255.255.255", "224.0.0.0 - 255.255.255.255"};
+//        Ip_addresses_Wayfair finder = new Ip_addresses_Wayfair(zones);
+//
+//        String[] testIps = {"0.0.0.123", "129.234.233.24", "256.256.2.1"};
+//        for (String ip : testIps) {
+//            System.out.println(finder.findZone(ip));
+//        }
+//    }
+//}
