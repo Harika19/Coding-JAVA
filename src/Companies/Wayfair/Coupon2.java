@@ -138,7 +138,8 @@ public class Coupon2 {
 
     private void storeInMapWithDate(){
         for (Coupons aCouponWithDate: generateCouponWithDate()){
-            List<Coupons> couponList =  couponWithDateMap.getOrDefault(aCouponWithDate.CategoryName, new ArrayList<>());
+            List<Coupons> couponList =  couponWithDateMap.getOrDefault(aCouponWithDate.CategoryName,
+                    new ArrayList<>());
             couponList.add(aCouponWithDate);
             couponWithDateMap.put(aCouponWithDate.CategoryName, couponList);
         }

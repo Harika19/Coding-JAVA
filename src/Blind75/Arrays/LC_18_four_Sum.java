@@ -16,7 +16,7 @@ public class LC_18_four_Sum {
                 int k=j+1;
                 int n = arr.length-1;
                 while (k<n){
-                    int sum = arr[i]+arr[j]+arr[k]+arr[n];
+                    long sum = (long) arr[i]+arr[j]+arr[k]+arr[n];
                     if(sum ==target){
                         res.add(Arrays.asList(arr[i],arr[j],arr[k],arr[n]));
                         while (k != arr.length-1 && arr[k]==arr[k+1]) k++;

@@ -7,7 +7,7 @@ public class LC_31_next_permutation {
     private void reverse(int[] arr, int start,int end){
         while(start<=end){
             int temp=arr[start];
-         temp= arr[start];
+            temp= arr[start];
             arr[start]= arr[end];
             arr[end] = temp;
             start++;
@@ -16,7 +16,6 @@ public class LC_31_next_permutation {
     }
     private int[] permutation(int[] arr){
         int index =-1;
-        int[] res = new int[3];
         for(int i=arr.length-2;i>=0;i--){
             if(arr[i]<arr[i+1]){
                 index = i;
@@ -37,7 +36,7 @@ public class LC_31_next_permutation {
             }
         }
         reverse(arr, index+1, arr.length-1);
-    return arr;
+        return arr;
     }
     public static void main(String[] args) {
         int[] arr = {1,2,3};

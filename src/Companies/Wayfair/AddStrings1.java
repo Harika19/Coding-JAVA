@@ -6,6 +6,7 @@ public class AddStrings1 {
         System.out.println(add("1000","2"));
         System.out.println(add("999","1"));
         System.out.println(add("55","44"));
+        System.out.println(add("0","0"));
     }
     public static String add(String a, String b){
         int n1 = a.length()-1;

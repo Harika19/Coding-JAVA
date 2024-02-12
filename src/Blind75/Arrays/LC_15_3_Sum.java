@@ -20,7 +20,6 @@ public class LC_15_3_Sum {
                     while(k!= arr.length-1 && arr[k]==arr[k+1]) k--;
                     j++;
                     k--;
-
                 }else if(sum<0){
                     j++;
                 }else{
