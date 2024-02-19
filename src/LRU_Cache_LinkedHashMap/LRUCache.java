@@ -19,16 +19,14 @@ import java.util.Map;
     // This method works in O(1)
     public int get(int key)
     {
-        System.out.println("Going to get the value " +
-                "for the key : " + key);
+        System.out.println("get for key  " + key );
         return map.getOrDefault(key, -1);
     }
 
     // This method works in O(1)
     public void set(int key, int value)
     {
-        System.out.println("Going to set the (key, " +
-                "value) : (" + key + ", " + value + ")");
+        System.out.println("set " + key + "-> " + value);
         map.put(key, value);
     }
 }
