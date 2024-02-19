@@ -10,7 +10,7 @@ public class ChildA extends ParentA {
         System.out.println("publicAmazon      : "+publicAmazon);
     }
 
-    public String getString(String str) {
+    public String getStringChild(String str) {
         System.out.println(" Parent : "+publicAmazon);
         return publicAmazon;
     }

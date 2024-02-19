@@ -33,7 +33,7 @@ class B extends C{
     }
     B(int b){
         //super(2);
-        this();
+        this(); // A     C     B       B-param8     B-C SHOWW
         System.out.println("B-param"+ b);
     }
     public void show(){
