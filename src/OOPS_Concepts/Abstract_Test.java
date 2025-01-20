@@ -14,6 +14,18 @@ class B2 extends A2{
         System.out.println("test2");
     }
 }
+
+class B3 extends A2{
+    void test3(){ // all abstract methods should be defined here
+        System.out.println("test2");
+    }
+
+    @Override
+    public void test(){
+        System.out.println("Overrided test3");
+    }
+}
+
 public class Abstract_Test {
     public static void main(String[] args) {
         B2 obj = new B2(); // obj cannot be created fo abstract classes
