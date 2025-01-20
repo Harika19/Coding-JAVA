@@ -44,3 +44,26 @@ public class Main
 		base.hello();
 	}
 }
+
+/*
+
+Output:
+
+-- Derived calling Derived class --
+
+Base Class Constructor Called 
+Derived Class Constructor Called 
+Hello Derived
+
+-- Base calling Derived class --
+
+Base Class Constructor Called 
+Derived Class Constructor Called 
+Hello Derived
+
+-- Base calling Base class --
+
+Base Class Constructor Called 
+Hello Base
+
+*/
